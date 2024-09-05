@@ -22,6 +22,7 @@ const HeaderContainer = styled.header`
   align-items: center;
   justify-content: space-evenly;
   padding: 20px;
+  z-index: 900;
 `;
 
 const Icon = styled.div`
