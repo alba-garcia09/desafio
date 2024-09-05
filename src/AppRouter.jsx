@@ -1,11 +1,12 @@
 import { useRoutes } from 'react-router-dom';
-import Hello from './Hello.jsx';
+import Home from '../src/pages/Home/Home';
+
 
 function AppRouter() {
   return useRoutes(
     [
       {
-        element: <Hello />,
+        element: <Home />,
         path: '/',
       },
     ],

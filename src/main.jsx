@@ -23,7 +23,7 @@ const Footer = styled.footer`
   width: 100vw;
   height: 5vh;
   font-size: 70%;
-  background-color: #6313F2;
+  background-color: var(--primaryColor);
   color: white;
   display: flex;
   justify-content: center;
