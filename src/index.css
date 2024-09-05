@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
+
+:root{
+  --primaryColor: #6313F2;
+  --secundaryColor: #8A4EF5;
+  --myWhite: #C3D9FB;
+  --myBlack: #2E2E2E;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  font-family: 'Montserrat', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 300;
+
+  background-color: white;
+  margin: 0;
+  padding: 0;
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  overflow-x: hidden;
+}
+
+div {
+  width: 100%;
+}
+
+a {
+  font-weight: 500;
+  color: var(--secundaryColor);
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: var(--secundaryColor);
+}
+
+h1 {
+  font-size: 2.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 12px;
+}
+
+h2 {
+  font-size: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h3 {
+  font-size: 1em;
+}
+
+h4 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 12px;
+}
+
+p {
+  font-size: 1.15em;
+}
+
+.littleText {
+  font-size: 0.8rem;
+  color: #CC88FF;
+}
+
+button {
+  border:1.75px solid transparent;
+  border-color:var(--primaryColor);
+  padding: 0.3em 0.6em;
+  border-radius: 50px !important;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: white;
+  color:var(--myBlack);
+  cursor: pointer;
+   transition: color 0.25s;
+
+}
+
+button:hover {
+
+  transform: scale(1.1);
+  color:white;
+  background-color: var(--primaryColor);
+}
+
+
+.blueButton {
+  padding: 0.3em 0.6em;
+  border-radius: 50px !important;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--primaryColor);
+  color:white;
+  cursor: pointer;
+   transition: color 0.25s;
+
+}
+
+blueButton:hover {
+
+  transform: scale(1.1);
+  color:white;
+  background-color: var(--myBlack);
+}
