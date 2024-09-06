@@ -1,6 +1,8 @@
 import { useRoutes } from 'react-router-dom';
 import Hello from './Hello.jsx';
 import Home from '../src/pages/Home/Home.jsx'
+import Tickets from '../src/pages/Tickets/Tickets';
+
 
 function AppRouter() {
   return useRoutes(
@@ -8,6 +10,10 @@ function AppRouter() {
       {
         element: <Home />,
         path: '/',
+      },
+      {
+        element: <Tickets />,
+        path: '/tickets',
       },
     ],
   )
