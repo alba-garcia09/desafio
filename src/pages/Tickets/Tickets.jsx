@@ -17,7 +17,7 @@ const WhiteBanner = styled.div`
 const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Ajustado para alinear a la izquierda */
+  align-items: flex-start;
   text-align: left;
   margin-bottom: 20px;
 `;
@@ -37,12 +37,8 @@ const AcordeonContainer = styled.div`
   text-align: left;
 `;
 
-
-
-
 function Tickets() {
   const navigate = useNavigate();
-
   return (
     <>
       <WhiteBanner>
@@ -112,16 +108,8 @@ function Tickets() {
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
-
-
-
       </AcordeonContainer>
-
-
       </WhiteBanner>
-
-
-
     </>
   );
 }
