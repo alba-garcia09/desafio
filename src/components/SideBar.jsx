@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react'
 import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom';
 
 const Button = styled.button`
   display: flex;
@@ -73,6 +74,7 @@ const Item = styled.p`
 `
 
 function MobileSideBar(props) {
+  const navigate = useNavigate();
   const {
     children,
     animationTime=800,
@@ -122,7 +124,7 @@ function MobileSideBar(props) {
             <>
               <Item>Programa</Item>
               <Item>Ponentes</Item>
-              <Item>Entradas</Item>
+              <Item onClick={() => navigate('/tickets')}>Entradas</Item>
               <Item>Galeria</Item>
               <Item>Premios Digit</Item>
             </>
