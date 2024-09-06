@@ -149,8 +149,6 @@ blueButton:hover {
 }
 
 .acordeonButton:hover {
-
-
   color:white;
   background-color: var(--myBlack);
 }
