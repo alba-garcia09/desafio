@@ -44,7 +44,7 @@ function Tickets() {
       <WhiteBanner>
         <TextContainer>
           <h3>Selecciona el tipo de entrada</h3>
-          <p><b>Las entradas incluyen</b></p>
+          <p style={{color:'#6313F2'}}>Las entradas incluyen</p>
           <ul>
             <li>Welcome Pack del asistente</li>
             <li>Asistencia a ponencias y clases magistrales</li>

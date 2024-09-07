@@ -54,7 +54,7 @@ a:hover {
 }
 
 h1 {
-  font-size: 2.5em;
+  font-size: 3em;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -62,30 +62,29 @@ h1 {
 }
 
 h2 {
-  font-size: 2em;
+  font-size: 2.5em;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 h3 {
-  font-size: 1em;
+  font-size: 2em;
+  color:var(--primaryColor)
 }
 
 h4 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-bottom: 12px;
+  font-size: 1.5em;
+  color:var(--primaryColor)
 }
 
 p {
-  font-size: 1em;
+  font-size: 1.2em;
 }
 
 
 li {
-  font-size: 0.8em;
+  font-size: 1em;
 }
 
 .littleText {
