@@ -24,7 +24,8 @@ const Button = styled.button`
   }
 
   &.open div.line:first-child {
-    transform: rotate(45deg);
+    transform: rotate(35deg);
+    width: 2.2;
   }
 
   &.open div.line:nth-child(2) {
@@ -32,13 +33,14 @@ const Button = styled.button`
   }
 
   &.open div.line:last-child {
-    transform: rotate(-45deg);
+    transform: rotate(-35deg);
+    width: 2.2;
   }
 `
 
 const Aside = styled.div`
   display: flex;
-  flex-direction: column; /* Mostrar los hijos en columna */
+  flex-direction: column;
   width: 0px;
   height: ${ props => props.height };
   background-color: ${ props => props.$backgroundColor };
@@ -55,7 +57,7 @@ const Aside = styled.div`
   & > * {
     margin-left: -${ props => props.width };
     transition: margin-left ${ props => props.$animationTime }ms;
-    padding: 0.5rem; /* Añadir padding para un poco de espacio interno */
+    padding: 0.5rem;
   }
 
   &.open > * {
@@ -65,11 +67,11 @@ const Aside = styled.div`
 
 const Item = styled.p`
   margin: 0;
-  padding: 1rem; /* Espacio alrededor del texto */
-  border-bottom: 1px solid #ccc; /* Línea de separación */
+  padding: 1rem;
+  border-bottom: 1px solid #ccc;
 
   &:last-child {
-    border-bottom: none; /* Quitar la línea de separación para el último ítem */
+    border-bottom: none;
   }
 `
 
@@ -104,6 +106,11 @@ function MobileSideBar(props) {
     }
   }
 
+  function handleItemClick(path) {
+    navigate(path)
+    tooglePanel()
+  }
+
   return (
     <>
       <Button onClick={tooglePanel} className={openClass ? 'open' : ''} $linesColor={linesColor}>
@@ -122,11 +129,11 @@ function MobileSideBar(props) {
         >
           {
             <>
-              <Item>Programa</Item>
-              <Item>Ponentes</Item>
-              <Item onClick={() => navigate('/tickets')}>Entradas</Item>
-              <Item>Galeria</Item>
-              <Item>Premios Digit</Item>
+              <Item onClick={() => handleItemClick('/program')}>Programa</Item>
+              <Item onClick={() => handleItemClick('/speakers')}>Ponentes</Item>
+              <Item onClick={() => handleItemClick('/tickets')}>Entradas</Item>
+              <Item onClick={() => handleItemClick('/gallery')}>Galería</Item>
+              <Item onClick={() => handleItemClick('/prizes')}>Premios Digit</Item>
             </>
           }
         </Aside>
