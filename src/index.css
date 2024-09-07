@@ -112,7 +112,6 @@ button:hover {
   background-color: var(--primaryColor);
 }
 
-
 .blueButton {
   padding: 0.3em 0.6em;
   border-radius: 50px !important;
@@ -123,32 +122,47 @@ button:hover {
   color:white;
   cursor: pointer;
    transition: color 0.25s;
-
 }
 
 blueButton:hover {
-
-
   color:white;
   background-color: var(--myBlack);
 }
 
-.acordeonButton {
+.minimalButton {
+  border:0px solid transparent !important;
   padding: 0.3em 0.6em;
-  border-radius: 50px !important;
+  border-radius: 0px !important;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: var(--primaryColor);
-  color:white;
+  background-color: white;
+  color:var(--myBlack);
   cursor: pointer;
-   transition: color 0.25s;
-
+  transition: color 0.25s;
 }
 
-.acordeonButton:hover {
-  color:white;
-  background-color: var(--myBlack);
+.minimalButton {
+  border: 0px solid transparent !important;
+  padding: 0.3em 0.6em;
+  border-radius: 0px !important;
+  font-size: 0.7em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: white;
+  color: var(--myBlack);
+  cursor: pointer;
+  transition: color 0.25s, border-bottom-color 0.25s;
 }
+
+.minimalButton:hover,
+.minimalButton:focus {
+  color: var(--primaryColor);
+  background-color: white;
+  border: 0px solid transparent;
+  border-bottom: 3px solid var(--primaryColor) !important;
+  outline: none;
+}
+
 
 
