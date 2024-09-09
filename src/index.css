@@ -164,5 +164,13 @@ blueButton:hover {
   outline: none;
 }
 
+.programButton {
+  color: var(--myBlack);
+  font-size: 0.9;
+}
 
+.programButton:hover {
+  color: var(--primaryColor);
+  font-size: 0.9em;
+}
 

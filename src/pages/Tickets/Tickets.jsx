@@ -101,7 +101,7 @@ function Tickets() {
           <Accordion defaultActiveKey="0">
             {group === 1 && (
               <>
-                <Accordion.Item eventKey="">
+                <Accordion.Item eventKey="0">
                   <Accordion.Header>
                     Entrada 23 de mayo
                   </Accordion.Header>
