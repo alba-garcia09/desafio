@@ -12,7 +12,7 @@ const Overlay = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(99, 19, 242, 0.9);
   z-index: 9999;
 `;
 
@@ -40,8 +40,7 @@ const LoadingOverlay = ({ isLoading }) => {
       <LogoContainer>
         <img src={whiteLogo} alt="Loading..." style={{ width: '100px', height: 'auto' }} />
         <div style={{ color: 'white', marginTop: '10px', fontSize: '1.5rem', fontWeight: 'bold' }}>
-
-        </div>
+                 </div>
       </LogoContainer>
     </Overlay>
   );
