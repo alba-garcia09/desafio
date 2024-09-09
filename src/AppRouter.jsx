@@ -2,8 +2,8 @@
 import { useRoutes } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import Tickets from './pages/Tickets/Tickets';
-import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
+import LoginPage from './pages/login/LoginPage';
+import RegisterPage from './pages/Register/RegisterPage';
 
 function AppRouter() {
   return useRoutes(

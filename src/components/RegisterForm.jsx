@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { evaluatePasswordStrength } from '../utils/passwordUtils'; // Importa la función de evaluación
+//Ayuda
 
 // Styled components
 const Container = styled.div`
