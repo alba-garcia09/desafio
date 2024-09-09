@@ -82,14 +82,12 @@ p {
   font-size: 1.2em;
 }
 
-
-li {
+.littleText {
   font-size: 1em;
 }
 
-.littleText {
-  font-size: 0.8rem;
-  color: #CC88FF;
+li {
+  font-size: 1em;
 }
 
 button {
