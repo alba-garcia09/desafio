@@ -81,7 +81,7 @@ const StylesBanner = styled.div`
   }
 
   @media (min-width: 1024px) {
-    padding: 60px 40px;
+    padding: 0px 0px;
   }
 `;
 
@@ -100,6 +100,16 @@ const LogoSheet = styled.div`
 
 const MyBigProduct = styled.img`
   width: 100%;
+`;
+
+const ProductHeader = styled.img`
+  width: 100%;
+  height: auto;
+
+  @media (min-width: 1024px) {
+    height: 500px;
+    object-fit: cover;
+  }
 `;
 
 const OverlayContainer = styled.div`
@@ -191,15 +201,12 @@ function Home() {
   ];
 
   const handleLogoClick = (url) => {
-    // Direct link to external URL
     window.location.href = url;
   };
 
   const handleStyleImageClick = (url) => {
-    // Navigation to internal URL
     navigate(url);
   };
-
 
   return (
     <>
@@ -218,7 +225,7 @@ function Home() {
         >
           {styleImages.map((item, index) => (
             <BigProductSheet key={index}>
-              <MyBigProduct src={item.image} alt={item.name} />
+              <ProductHeader src={item.image} alt={item.name} />
               <OverlayContainer>
                 <h2>{item.name}</h2>
                 <button onClick={() => handleStyleImageClick(item.url)}>Acceder</button>
