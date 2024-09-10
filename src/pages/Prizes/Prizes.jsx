@@ -151,7 +151,7 @@ function Prizes() {
           </ColorBanner>
         </WhiteBanner>
 
-        <WhiteBanner>
+        <WhiteBanner style={{paddingTop:'30px', paddingBottom:'50px' }}>
           <TextCentered>
             <h2>Regístrate</h2>
             <p className="littleText">
