@@ -89,7 +89,6 @@ li {
 
 .littleText {
   font-size: 0.8rem;
-  color: #CC88FF;
 }
 
 button {
@@ -104,7 +103,6 @@ button {
   color:var(--myBlack);
   cursor: pointer;
    transition: color 0.25s;
-
 }
 
 button:hover {
@@ -157,20 +155,19 @@ blueButton:hover {
 
 .minimalButton:hover,
 .minimalButton:focus {
-  color: var(--primaryColor);
-  background-color: white;
+  color: white;
+  background-color: var(--primaryColor);
   border: 0px solid transparent;
-  border-bottom: 3px solid var(--primaryColor) !important;
   outline: none;
 }
 
 .programButton {
   color: var(--myBlack);
-  font-size: 0.9;
+  font-size: 0.9em !important;
 }
 
 .programButton:hover {
   color: var(--primaryColor);
-  font-size: 0.9em;
+  font-size: 0.9em !important;
 }
 

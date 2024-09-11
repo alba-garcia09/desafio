@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import whiteLogo from '../assets/LOGOS/logoBlanco.png';
 
-// Define the styled components
 const Overlay = styled.div`
   position: fixed;
   top: 0;
@@ -31,7 +30,6 @@ const LogoContainer = styled.div`
   }
 `;
 
-// Functional component
 const LoadingOverlay = ({ isLoading }) => {
   if (!isLoading) return null;
 

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function connectApi() {
+function useApi() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -68,4 +68,4 @@ function connectApi() {
   return { data, getData, error, isLoading };
 }
 
-export default connectApi;
+export default useApi;
