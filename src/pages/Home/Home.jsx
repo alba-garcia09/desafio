@@ -7,10 +7,10 @@ import { useNavigate } from 'react-router-dom';
 import pcPhoto from '../../assets/pc.jpg';
 import ponenciaPhoto from '../../assets/ponencia.jpg';
 import speakingPhoto from '../../assets/speaking.jpg';
-import logo1 from '../../assets/logo1.jpg';
-import logo2 from '../../assets/logo2.jpg';
-import logo3 from '../../assets/logo3.jpg';
-import logo4 from '../../assets/logo4.jpg';
+import Pentec from '../../assets/Pentec.jpg';
+import Samoo from '../../assets/Samoo.jpg';
+import OpenLMS from '../../assets/OpenLMS.jpg';
+import ReadSpeaker from '../../assets/ReadSpeaker.jpg';
 
 const Container = styled.div`
   width: 100%;
@@ -194,10 +194,10 @@ function Home() {
   ];
 
   const logoImages = [
-    { image: logo1, name: 'Logo 1', url: 'https://www.pentec.es/' },
-    { image: logo2, name: 'Logo 2', url: 'https://www.samoo.es/' },
-    { image: logo3, name: 'Logo 3', url: 'https://www.openlms.net/es/' },
-    { image: logo4, name: 'Logo 4', url: 'https://www.readspeaker.com/es/' },
+    { image: Pentec, name: 'Logo 1', url: 'https://www.pentec.es/' },
+    { image: Samoo, name: 'Logo 2', url: 'https://www.samoo.es/' },
+    { image: OpenLMS, name: 'Logo 3', url: 'https://www.openlms.net/es/' },
+    { image: ReadSpeaker, name: 'Logo 4', url: 'https://www.readspeaker.com/es/' },
   ];
 
   const handleLogoClick = (url) => {
