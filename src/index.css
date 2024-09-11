@@ -82,13 +82,12 @@ p {
   font-size: 1.2em;
 }
 
+.littleText {
+  font-size: 0.8em;
+}
 
 li {
   font-size: 1em;
-}
-
-.littleText {
-  font-size: 0.8rem;
 }
 
 button {
