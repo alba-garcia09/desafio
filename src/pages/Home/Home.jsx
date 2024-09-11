@@ -4,13 +4,15 @@ import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
-import Person1 from '../../assets/1.jpg';
-import Person2 from '../../assets/2.jpg';
-import Person3 from '../../assets/3.jpg';
-import logo1 from '../../assets/logo1.png';
-import logo2 from '../../assets/logo2.png';
+import pcPhoto from '../../assets/pc.jpg';
+import ponenciaPhoto from '../../assets/ponencia.jpg';
+import speakingPhoto from '../../assets/speaking.jpg';
+import logo1 from '../../assets/logo1.jpg';
+import logo2 from '../../assets/logo2.jpg';
 import logo3 from '../../assets/logo3.jpg';
-import logo4 from '../../assets/logo4.png';
+import logo4 from '../../assets/logo4.jpg';
+
+
 
 const Container = styled.div`
   width: 100%;
@@ -188,9 +190,9 @@ const ticketsData = [
 function Home() {
   const navigate = useNavigate();
   const styleImages = [
-    { image: Person1, name: 'Persona 1', url: '/program' },
-    { image: Person2, name: 'Persona 2' , url: '/gallery'},
-    { image: Person3, name: 'Persona 3', url: '/prizes' }
+    { image: ponenciaPhoto , name: 'Conoce nuestro programa', url: '/program' },
+    { image: speakingPhoto, name: 'Descubre eventos anteriores' , url: '/gallery'},
+    { image: pcPhoto, name: 'Motivate con nuestros premios', url: '/prizes' }
   ];
 
   const logoImages = [
@@ -236,7 +238,7 @@ function Home() {
       </StylesBanner>
 
       <Container>
-        <WhiteBanner>
+        <WhiteBanner style={{paddingTop:'4em',paddingBottom:'4em', }}>
           <TextContainer>
             <h1>¿QUÉ ES E-LEARNING EXPERIENCE?</h1>
             <p className="littleText">E-learning Experience es un evento de formación online y tecnología educativa, iniciado en 2016. Ha crecido en relevancia, incluyendo conferencias, talleres y networking. En 2024, ofrece entrevistas exclusivas One2One y el premio «Digit» para destacar las mejores iniciativas, con los ganadores anunciados en una cena especial.</p>
@@ -288,9 +290,9 @@ function Home() {
           </ColorBanner>
         </WhiteBanner>
 
-        <StylesBanner>
+        <StylesBanner style={{paddingTop:'5em', paddingBottom: '5em'}}>
           <TextCentered>
-            <h2 style={{ paddingTop: '40px', paddingBottom: '30px' }}>Nuestros partners</h2>
+            <h2>Nuestros partners</h2>
           </TextCentered>
           <Carousel
             showArrows={false}

@@ -102,7 +102,6 @@ button {
   color:var(--myBlack);
   cursor: pointer;
    transition: color 0.25s;
-
 }
 
 button:hover {
@@ -171,4 +170,3 @@ blueButton:hover {
   color: var(--primaryColor);
   font-size: 0.9em;
 }
-
