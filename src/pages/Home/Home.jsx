@@ -12,8 +12,6 @@ import logo2 from '../../assets/logo2.jpg';
 import logo3 from '../../assets/logo3.jpg';
 import logo4 from '../../assets/logo4.jpg';
 
-
-
 const Container = styled.div`
   width: 100%;
   max-width: 1000px;
