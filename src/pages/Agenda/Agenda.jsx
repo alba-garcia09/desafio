@@ -1,170 +1,198 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { useNavigate } from 'react-router-dom';
-import { Accordion } from 'react-bootstrap';
+import React, { Fragment, useState } from "react";
+import { Scheduler } from "@aldabil/react-scheduler";
 
-const Container = styled.div`
-  width: 100%;
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 20px;
-
-  @media (max-width: 767px) {
-    max-width: 100%;
-    padding: 0 10px;
+const EVENTS = [
+  {
+    event_id: 1,
+    title: "Event 1",
+    start: new Date("2021 5 2 09:30"),
+    end: new Date("2021 5 2 10:30"),
+    admin_id: 1
+  },
+  {
+    event_id: 2,
+    title: "Event 2",
+    start: new Date("2021 5 4 10:00"),
+    end: new Date("2021 5 4 11:00"),
+    admin_id: 2
+  },
+  {
+    event_id: 3,
+    title: "Event 3",
+    start: new Date("2021 4 27 09:00"),
+    end: new Date("2021 4 28 10:00"),
+    admin_id: 1
+  },
+  {
+    event_id: 4,
+    title: "Event 4",
+    start: new Date("2021 5 4 9:00"),
+    end: new Date("2021 5 4 10:36"),
+    admin_id: 2
+  },
+  {
+    event_id: 5,
+    title: "Event 5",
+    start: new Date("2021 5 1 10:00"),
+    end: new Date("2021 5 18 11:00"),
+    admin_id: 4
+  },
+  {
+    event_id: 6,
+    title: "Event 6",
+    start: new Date("2021 5 2 11:00"),
+    end: new Date("2021 5 2 12:00"),
+    admin_id: 2
+  },
+  {
+    event_id: 7,
+    title: "Event 7",
+    start: new Date("2021 5 1 12:00"),
+    end: new Date("2021 5 1 13:00"),
+    admin_id: 3
+  },
+  {
+    event_id: 8,
+    title: "Event 8",
+    start: new Date("2021 5 1 13:00"),
+    end: new Date("2021 5 1 14:00"),
+    admin_id: 4
+  },
+  {
+    event_id: 9,
+    title: "Event 11",
+    start: new Date("2021 5 5 16:00"),
+    end: new Date("2021 5 5 17:00"),
+    admin_id: 1
+  },
+  {
+    event_id: 10,
+    title: "Event 9",
+    start: new Date("2021 5 6  15:00"),
+    end: new Date("2021 5 6 16:00"),
+    admin_id: 2
+  },
+  {
+    event_id: 11,
+    title: "Event 10",
+    start: new Date("2021 5 6 14:00"),
+    end: new Date("2021 5 6 15:00"),
+    admin_id: 1
   }
-`;
-
-const WhiteBanner = styled.div`
-  width: 100%;
-  color: black;
-  display: flex;
-  flex-direction:column;
-  justify-content: left;
-  align-items: left;
-  text-align: center;
-  padding: 20px;
-`;
-
-const TextContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-`;
-
-const TextCentered = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-`;
-
-const ColorBanner = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  border: 1.75px solid transparent;
-  border-color: var(--primaryColor);
-  padding: 10px;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  border-radius: 10px;
-  background-color: white;
-  color: var(--myBlack);
-  justify-content: center;
-  align-items: flex-start;
-  text-align: left;
-`;
-
-const data = [
-  {
-    title: 'Premio a la mejor iniciativa en contenidos',
-    1: 'Air Nostrum',
-    2: 'Unie',
-    3: 'Umivale Activa'
-  },
-  {
-    title: 'Premio OpenLMS al mejor ecosistema de aprendizaje',
-    1: 'Unia',
-    2: 'Sescam',
-    3: 'Comillas'
-  },
-  {
-    title: 'Premio a la mejor experiencia de usuario',
-    1: 'ASM',
-    2: 'EALDE',
-    3: 'Comillas'
-  },
-  {
-    title: 'Premio al mejor servicio al cliente',
-    1: 'Smowl',
-    2: 'Compilatio',
-    3: 'Anthology'
-  },
-  {
-    title: 'Premio al impacto social y comunitario',
-    1: 'ReadSpeaker',
-    2: 'Bemyvega',
-    3: 'Anthology'
-  },
-  {
-    title: 'Premio a la innovación',
-    1: 'Zoom',
-    2: 'LViS',
-    3: 'Optimum Assesment'
-  },
-  {
-    title: 'Premio al proveedor del año',
-    1: 'OpenLMS',
-    2: 'iSpring',
-    3: 'ReadSpeaker'
-  },
 ];
 
-function Prizes() {
-  const navigate = useNavigate();
+const RESOURCES = [
+  {
+    admin_id: 1,
+    title: "John",
+    mobile: "555666777",
+    avatar: "https://picsum.photos/200/300",
+    color: "#ab2d2d"
+  },
+  {
+    admin_id: 2,
+    title: "Sarah",
+    mobile: "545678354",
+    avatar: "https://picsum.photos/200/300",
+    color: "#58ab2d"
+  },
+  {
+    admin_id: 3,
+    title: "Joseph",
+    mobile: "543678433",
+    avatar: "https://picsum.photos/200/300",
+    color: "#a001a2"
+  },
+  {
+    admin_id: 4,
+    title: "Mera",
+    mobile: "507487620",
+    avatar: "https://picsum.photos/200/300",
+    color: "#08c5bd"
+  }
+];
+
+
+function Agenda() {
+  const [mode, setMode] = useState("default"); // No es necesario especificar el tipo en JavaScript
 
   return (
-    <>
-      <Container>
-        <WhiteBanner>
-          <TextContainer>
-            <h1>Premios Digit E-learning</h1>
-            <p style={{ color: 'var(--primaryColor)' }}>
-              Celebrando la Innovación en el aprendizaje digital
-            </p>
-            <p className="littleText">
-              ¡Es momento de celebrar el aprendizaje digital en su máxima expresión!
-              Desde Samoo – Elearning by PENTEC estamos muy contentos de compartir que en
-              la sexta edición de E-learning Experience 24, nuestro encuentro presencial
-              insignia, daremos un paso adelante al otorgar los Premios Digit E-learning.
-            </p>
-          </TextContainer>
-        </WhiteBanner>
-
-        <WhiteBanner>
-          <ColorBanner style={{ padding: '20px' }}>
-            <h3>Conoce las categorias</h3>
-            <p className="littleText">Con categorías que abarcan desde la innovación y el impacto social
-              hasta el servicio al cliente y la experiencia de usuario, celebraremos
-              a los líderes que están transformando el e-learning. ¡Prepárate para conocer a los mejores</p>
-            <Accordion defaultActiveKey="0">
-              {data.map((item, index) => (
-                <Accordion.Item eventKey={index.toString()} key={index}>
-                  <Accordion.Header>
-                    {item.title}
-                  </Accordion.Header>
-                  <Accordion.Body>
-                    <ul>
-                      {[1, 2, 3].map(key => (
-                        <li key={key}>{item[key]}</li>
-                      ))}
-                    </ul>
-                  </Accordion.Body>
-                </Accordion.Item>
-              ))}
-            </Accordion>
-          </ColorBanner>
-        </WhiteBanner>
-
-        <WhiteBanner style={{paddingTop:'30px', paddingBottom:'50px' }}>
-          <TextCentered>
-            <h2>Regístrate</h2>
-            <p className="littleText">
-              y enterate de todas las novedades
-            </p>
-            <button className="blackButton" onClick={() => navigate('/register')}>
-              Regístrate
-            </button>
-          </TextCentered>
-        </WhiteBanner>
-      </Container>
-    </>
+    <Fragment>
+      <div style={{ textAlign: "center" }}>
+        <span>Resource View Mode: </span>
+        <Button
+          color={mode === "default" ? "primary" : "default"}
+          variant={mode === "default" ? "contained" : "text"}
+          size="small"
+          onClick={() => setMode("default")}
+        >
+          Default
+        </Button>
+        <Button
+          color={mode === "tabs" ? "primary" : "default"}
+          variant={mode === "tabs" ? "contained" : "text"}
+          size="small"
+          onClick={() => setMode("tabs")}
+        >
+          Tabs
+        </Button>
+      </div>
+      <Scheduler
+        events={EVENTS}
+        resources={RESOURCES}
+        resourceFields={{
+          idField: "admin_id",
+          textField: "title",
+          subTextField: "mobile",
+          avatarField: "title",
+          colorField: "color"
+        }}
+        resourceViewMode={mode}
+        selectedDate={new Date(2021, 4, 2)}
+        fields={[
+          {
+            name: "admin_id",
+            type: "select",
+            default: RESOURCES[0].admin_id,
+            options: RESOURCES.map((res) => {
+              return {
+                id: res.admin_id,
+                text: `${res.title} (${res.mobile})`,
+                value: res.admin_id // Debería coincidir con la propiedad "name"
+              };
+            }),
+            config: { label: "Assignee", required: true }
+          }
+        ]}
+        viewerExtraComponent={(fields, event) => {
+          return (
+            <div>
+              {fields.map((field, i) => {
+                if (field.name === "admin_id") {
+                  const admin = field.options.find(
+                    (fe) => fe.id === event.admin_id
+                  );
+                  return (
+                    <Typography
+                      key={i}
+                      style={{ display: "flex", alignItems: "center" }}
+                      color="textSecondary"
+                      variant="caption"
+                      noWrap
+                    >
+                      <PersonRoundedIcon /> {admin.text}
+                    </Typography>
+                  );
+                } else {
+                  return null; // Mejor usar null en lugar de una cadena vacía
+                }
+              })}
+            </div>
+          );
+        }}
+      />
+    </Fragment>
   );
 }
 
-export default Prizes;
+export default Agenda;
