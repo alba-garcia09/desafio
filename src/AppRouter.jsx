@@ -26,7 +26,7 @@ function AppRouter() {
       },
       {
         element: <Agenda/>,
-        path: '/myAgenda',
+        path: '/Agenda',
       },
     ],
   )
