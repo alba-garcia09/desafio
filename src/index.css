@@ -209,7 +209,8 @@ blueButton:hover {
 }
 
 .custom-slot-label {
-  width: 60px; /* Ajusta el valor según el ancho deseado */
-  text-align: right; /* Alineación de texto a la derecha */
+  width: 100px; /* Ajusta el ancho según sea necesario */
+  text-align: right;
+  padding-right: 10px; /* Añadir espaciado entre las horas y los eventos */
+  font-size: 14px; /* Tamaño de fuente ajustable */
 }
-

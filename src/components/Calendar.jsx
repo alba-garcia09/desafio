@@ -1,290 +1,238 @@
-import { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { useNavigate } from 'react-router-dom';
-import useApi from '../../hooks/useAPI.js';
-import LoadingOverlay from '../../components/Spinner.jsx';
-import CalendarComponent from '../../components/Calendar.jsx';
+import FullCalendar from '@fullcalendar/react';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import { useEffect, useState } from "react";
+import useApi from "../hooks/useAPI";
 
-const Container = styled.div`
-  width: 100%;
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 20px;
-  box-sizing: border-box;
+// Estilos del modal (fondo negro semitransparente y contenido centrado)
+const modalStyles = {
+  overlay: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.75)', // Fondo negro semitransparente
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 1000, // Aumentar el z-index para que esté por encima de otros elementos
+  },
+  content: {
+    fontFamily: 'Montserrat',
+    padding: '30px',
+    borderRadius: '10px',
+    width: '400px',
+    textAlign: 'center', // Centrar el texto
+    backgroundColor: 'white', // Fondo blanco del modal
+    position: 'relative',
+  },
+  closeButton: {
+    position: 'absolute',
+    top: '10px',
+    right: '10px',
+    background: 'none',
+    border: 'none',
+    fontSize: '20px',
+    cursor: 'pointer',
+  },
+};
 
-  @media (max-width: 767px) {
-    max-width: 100%;
-    padding: 0 10px;
-  }
-`;
-
-const Partners = styled.div`
-  width: 100%;
-  color: 'var(--myBlack)' ;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  text-align: left;
-  padding: 10px;
-`;
-
-const ProductSeet = styled.div`
-  height: auto;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  box-sizing: border-box;
-
-  @media (max-width: 767px) {
-    flex-direction: column;
-    text-align: center;
-  }
-`;
-
-
-const MyProduct = styled.img`
-  height: auto;
-  max-width: 100%;
-  border-radius: 10px;
-  margin-bottom: 30px;
-  cursor: pointer;
-`;
-
-
-function Agenda() {
-  const navigate = useNavigate();
+const CalendarComponent = () => {
   const { data, getData, error, isLoading } = useApi();
+  const [selectedPartnerIndex, setSelectedPartnerIndex] = useState(0);
+  const [events, setEvents] = useState([]);
+  const [newEvent, setNewEvent] = useState({ title: '', date: '', time: '' });
+  const [showModal, setShowModal] = useState(false); // Controla la visibilidad del modal
+  const [apiError, setApiError] = useState('');
 
   useEffect(() => {
     getData({ route: 'partners/all' });
   }, []);
 
+  useEffect(() => {
+    if (data && data.length > 0) {
+      setEvents(data[selectedPartnerIndex].agenda || []);
+    }
+  }, [data, selectedPartnerIndex]);
 
-  if (isLoading) {
-    return <LoadingOverlay isLoading={true} />;
-  }
+  const openModal = (date) => {
+    setNewEvent((prev) => ({ ...prev, date }));
+    setShowModal(true);
+  };
 
-  if (error) {
-    return <div>Error: {error?.message}</div>;
-  }
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
-  const handleClick = (url) => {
-    if (url) {
-      window.location.href = url;
-    } else {
-      console.error('Invalid URL');
+  const handlePost = async (e) => {
+    e.preventDefault();
+    setApiError('');
+
+    // Crear el objeto de evento con las fechas formateadas
+    const start = new Date(`${newEvent.date}T${newEvent.time}`).toISOString();
+    const end = new Date(new Date(`${newEvent.date}T${newEvent.time}`).getTime() + 30 * 60000).toISOString();
+    console.log('end***********', end)
+
+    try {
+      await getData({
+        route: 'meetings/schedule',
+        method: 'POST',
+        body: {
+          partnerId: data[selectedPartnerIndex]._id,
+          clientId: '66e476153c38d9f1bdbad3aa',//hasta que no se pueda otra cosa
+          start: start,
+          end: end,
+        },
+      });
+    } catch (err) {
+      setApiError(err.message);
     }
   };
 
+
+  const handleSubmit = (event) => {
+    console.log(event); // Agrega esta línea para depurar
+    event.preventDefault();
+
+    if (newEvent.title && newEvent.date && newEvent.time) {
+      const startTime = new Date(`${newEvent.date}T${newEvent.time}`);
+      const endTime = new Date(startTime);
+      endTime.setMinutes(startTime.getMinutes() + 30);
+
+      const eventToAdd = {
+        title: newEvent.title,
+        start: startTime.toISOString(),
+        end: endTime.toISOString(),
+      };
+      console.log('eventToAdd', eventToAdd);
+
+      // Actualiza el estado de eventos
+      setEvents([...events, eventToAdd]);
+
+      // Enviar a la base de datos
+      handlePost();
+
+      setNewEvent({ title: '', date: '', time: '' });
+      closeModal();
+    }
+  };
+
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
   return (
-    <>
-      <Container>
-        <Partners>
-          <h1>One2Ones</h1>
-          <p className='littleText'>En nuestro evento educativo, tendrás la oportunidad de participar en sesiones "one to one"
-            con expertos en el campo. Estas reuniones privadas te permitirán obtener asesoramiento personalizado
-            y respuestas específicas a tus preguntas, asegurando una experiencia de aprendizaje adaptada
-            a tus necesidades. Aprovecha esta oportunidad para profundizar en temas de tu interés y recibir orientación directa de profesionales destacados.</p>
+    <div style={{ maxWidth: '900px', margin: '0 auto', padding: '20px', background: '#fff', borderRadius: '8px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)' }}>
+      <div style={{ marginBottom: '20px' }}>
+        {data && data.map((partner, index) => (
+          <button
+            key={partner.id}
+            onClick={() => setSelectedPartnerIndex(index)}
+            style={{
+              marginRight: '10px',
+              padding: '10px 15px',
+              backgroundColor: selectedPartnerIndex === index ? '#007bff' : '#ccc',
+              color: '#fff',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer'
+            }}>
+            {partner.name}
+          </button>
+        ))}
+      </div>
 
-          <Carousel
-            showArrows={false}
-            showThumbs={false}
-            showStatus={false}
-            infiniteLoop
-            useKeyboardArrows
-            autoPlay={true}
-            centerMode
-            centerSlidePercentage={100}
-            emulateTouch
-            swipeable
-          >
-            {data && Array.isArray(data) && data.map((item, index) => (
-              item.image && item.name && item.description && (
+      <FullCalendar
+        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+        initialView="timeGridDay"
+        events={events}
+        eventColor={getComputedStyle(document.documentElement).getPropertyValue('--primaryColor')}
+        slotMinTime="09:00:00"
+        slotMaxTime="19:00:00"
+        allDaySlot={false}
+        slotLabelFormat={{
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: false,
+        }}
+        slotLabelClassNames="custom-slot-label"
+        validRange={{
+          start: '2025-05-23',
+          end: '2025-05-25',
+        }}
+        slotDuration="00:30:00"  // Define la duración de cada slot como 30 minutos
+        selectable={true}  // Permite seleccionar un rango
+        selectConstraint={{
+          start: "00:30:00",
+        }}  // Define que la duración mínima de los eventos sea de 30 minutos
+        headerToolbar={{
+          left: 'prev,next',
+          center: '',
+          right: ''
+        }}
+        dateClick={(info) => openModal(info.dateStr)}
+      />
 
-                <ProductSeet key={index} >
-                  <div className="col-12 col-lg-6">
-                    <MyProduct src={item.image} alt={item.name} />
-                  </div>
-
-                  <div style={{ paddingLeft: '3em', paddingRight:'3em', textAlign:'left'}} className="col-12 col-lg-6" >
-                    <h3>{item.name}</h3>
-                    <p style={{ color: 'var(--primaryColor)' }}>{item.charge}</p>
-                    <p className='littleText'>{item.description}</p>
-                    <button onClick={() => handleClick(item.linkedin)}>Linkedin</button>
-                  </div>
-                </ProductSeet>
-              )
-            ))}
-          </Carousel>
-        </Partners>
-
-
-      </Container>
-<CalendarComponent></CalendarComponent>
-    </>
+      {showModal && (
+        <div style={modalStyles.overlay}>
+          <div style={modalStyles.content}>
+            <button style={modalStyles.closeButton} onClick={closeModal}>×</button>
+            <h2>Agregar Evento</h2>
+            <form onSubmit={handleSubmit}>
+              <div style={{ marginBottom: '10px' }}>
+                <label htmlFor="title">Título del Evento:</label>
+                <input
+                  type="text"
+                  id="title"
+                  value={newEvent.title}
+                  onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })}
+                  required
+                  style={{ width: '100%', padding: '8px', marginBottom: '10px' }}
+                />
+              </div>
+              <div style={{ marginBottom: '10px' }}>
+                <label htmlFor="date">Fecha del Evento:</label>
+                <input
+                  type="date"
+                  id="date"
+                  value={newEvent.date}
+                  onChange={(e) => setNewEvent({ ...newEvent, date: e.target.value })}
+                  required
+                  style={{ width: '100%', padding: '8px', marginBottom: '10px' }}
+                  min="2025-05-23"
+                  max="2025-05-24"
+                />
+              </div>
+              <div style={{ marginBottom: '10px' }}>
+                <label htmlFor="time">Hora de Inicio:</label>
+                <input
+                  type="time"
+                  id="time"
+                  value={newEvent.time}
+                  onChange={(e) => setNewEvent({ ...newEvent, time: e.target.value })}
+                  required
+                  style={{ width: '100%', padding: '8px', marginBottom: '10px' }}
+                />
+              </div>
+              <button type="submit" style={{ padding: '10px 20px', marginTop: '10px' }}>
+                Agregar Evento
+              </button>
+            </form>
+            {apiError && <div style={{ color: 'red', marginTop: '10px' }}>{apiError}</div>}
+          </div>
+        </div>
+      )}
+    </div>
   );
-}
+};
 
-export default Agenda;
-
-
+export default CalendarComponent;
 
 
 
-
-
-//este esta muy bien
-// import { useState, useEffect } from 'react';
-// import styled from 'styled-components';
-// import { Carousel } from 'react-responsive-carousel';
-// import 'react-responsive-carousel/lib/styles/carousel.min.css';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import { useNavigate } from 'react-router-dom';
-// import useApi from '../../hooks/useAPI.js';
-// import LoadingOverlay from '../../components/Spinner.jsx';
-// import FullCalendar from '@fullcalendar/react';
-// import dayGridPlugin from '@fullcalendar/daygrid';
-// import timeGridPlugin from '@fullcalendar/timegrid';
-// import interactionPlugin from '@fullcalendar/interaction';
-// import Modal from 'react-modal'; // Asegúrate de instalar react-modal
-
-// const Container = styled.div`
-//   width: 100%;
-//   max-width: 1000px;
-//   margin: 0 auto;
-//   padding: 0 20px;
-//   box-sizing: border-box;
-
-//   @media (max-width: 767px) {
-//     max-width: 100%;
-//     padding: 0 10px;
-//   }
-// `;
-
-// const Partners = styled.div`
-//   width: 100%;
-//   color: 'var(--myBlack)' ;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: flex-start;
-//   text-align: left;
-//   padding: 10px;
-// `;
-
-// const ProductSeet = styled.div`
-//   height: auto;
-//   width: 100%;
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: center;
-//   align-items: center;
-//   padding: 10px;
-//   box-sizing: border-box;
-
-//   @media (max-width: 767px) {
-//     flex-direction: column;
-//     text-align: center;
-//   }
-// `;
-
-
-// const MyProduct = styled.img`
-//   height: auto;
-//   max-width: 100%;
-//   border-radius: 10px;
-//   margin-bottom: 30px;
-//   cursor: pointer;
-// `;
-
-
-// function Agenda() {
-//   const navigate = useNavigate();
-//   const { data, getData, error, isLoading } = useApi();
-
-//   useEffect(() => {
-//     getData({ route: 'partners/all' });
-//   }, []);
-
-
-//   if (isLoading) {
-//     return <LoadingOverlay isLoading={true} />;
-//   }
-
-//   if (error) {
-//     return <div>Error: {error?.message}</div>;
-//   }
-
-//   const handleClick = (url) => {
-//     if (url) {
-//       window.location.href = url;
-//     } else {
-//       console.error('Invalid URL');
-//     }
-//   };
-
-//   return (
-//     <>
-//       <Container>
-//         <Partners>
-//           <h1>One2Ones</h1>
-//           <p className='littleText'>En nuestro evento educativo, tendrás la oportunidad de participar en sesiones "one to one"
-//             con expertos en el campo. Estas reuniones privadas te permitirán obtener asesoramiento personalizado
-//             y respuestas específicas a tus preguntas, asegurando una experiencia de aprendizaje adaptada
-//             a tus necesidades. Aprovecha esta oportunidad para profundizar en temas de tu interés y recibir orientación directa de profesionales destacados.</p>
-
-//           <Carousel
-//             showArrows={false}
-//             showThumbs={false}
-//             showStatus={false}
-//             infiniteLoop
-//             useKeyboardArrows
-//             autoPlay={true}
-//             centerMode
-//             centerSlidePercentage={100}
-//             emulateTouch
-//             swipeable
-//           >
-//             {data && Array.isArray(data) && data.map((item, index) => (
-//               item.image && item.name && item.description && (
-
-//                 <ProductSeet key={index} >
-//                   <div className="col-12 col-lg-6">
-//                     <MyProduct src={item.image} alt={item.name} />
-//                   </div>
-
-//                   <div style={{ paddingLeft: '3em', paddingRight:'3em', textAlign:'left'}} className="col-12 col-lg-6" >
-//                     <h3>{item.name}</h3>
-//                     <p style={{ color: 'var(--primaryColor)' }}>{item.charge}</p>
-//                     <p className='littleText'>{item.description}</p>
-//                     <button onClick={() => handleClick(item.linkedin)}>Linkedin</button>
-//                   </div>
-//                 </ProductSeet>
-//               )
-//             ))}
-//           </Carousel>
-//         </Partners>
-
-
-//       </Container>
-
-//     </>
-//   );
-// }
-
-// export default Agenda;
-
-
-
-
-
+//esto ya esta muy bien
 // import { useState, useEffect } from 'react';
 // import FullCalendar from '@fullcalendar/react';
 // import dayGridPlugin from '@fullcalendar/daygrid';
@@ -295,6 +243,8 @@ export default Agenda;
 // import useApi from '../../hooks/useAPI';
 // import styled from 'styled-components';
 // import { Carousel } from 'react-responsive-carousel';
+
+
 
 // const NewsBanner = styled.div`
 //   width: 100%;
@@ -357,8 +307,9 @@ export default Agenda;
 //   const { data, getData, error, isLoading } = useApi();
 
 //   useEffect(() => {
-//     getData({ route: 'partners' });
-//   }, [getData]);
+//     getData({ route: `partners` });
+//   }, []);
+
 
 //   const [eventsPerson1, setEventsPerson1] = useState([
 //     {
@@ -370,14 +321,16 @@ export default Agenda;
 
 //   const [eventsPerson2, setEventsPerson2] = useState([
 //     {
-//       title: 'Evento de prueba Persona 2',
+//       name: 'Evento de prueba Persona 2',
 //       start: '2025-05-24T14:00:00',
 //       end: '2025-05-24T14:30:00',
 //     },
+//     {
+//       name: 'Evento de prueba Persona 4',
+//       start: '2025-05-24T10:00:00',
+//       end: '2025-05-24T10:30:00',
+//     },
 //   ]);
-
-//   // Resto del código...
-
 
 //   const [selectedPerson, setSelectedPerson] = useState('person1');
 //   const [formTitle, setFormTitle] = useState('');
@@ -436,34 +389,7 @@ export default Agenda;
 //       <div style={{ margin: '0 auto', maxWidth: '900px', padding: '40px' }}>
 //         <h1>Mi Calendario</h1>
 
-//         <NewsBanner>
-//         <h1>Nuestros partners</h1>
-//         <Carousel
-//           showArrows={false}
-//           showThumbs={false}
-//           showStatus={false}
-//           infiniteLoop
-//           useKeyboardArrows
-//           autoPlay={true}
-//           centerMode
-//           centerSlidePercentage={50}
-//           emulateTouch
-//           swipeable
-//         >
-//           {data && data.map((item, index) => (
-//             item.image && item.image[0] && (
-//               <ProductSeet key={index}>
-//                 <MyProduct src={item.image} alt={item.name} />
-//                 <h3>{item.name}</h3>
-//                 <p>{item.description}</p>
-//               </ProductSeet>
-//             )
-//           ))}
-//         </Carousel>
-//       </NewsBanner>
-
-
-//         <div style={{ marginBottom: '20px' }}>
+//              <div style={{ marginBottom: '20px' }}>
 //           <label>
 //             <input
 //               type="radio"
@@ -583,6 +509,5 @@ export default Agenda;
 // };
 
 // export default CalendarPage;
-
 
 
