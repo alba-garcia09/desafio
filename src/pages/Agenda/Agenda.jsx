@@ -64,6 +64,7 @@ function Agenda() {
 
   useEffect(() => {
     getData({ route: 'partners/all' });
+    console.log('data', data)
   }, []);
 
 
