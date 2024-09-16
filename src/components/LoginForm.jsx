@@ -10,9 +10,9 @@ const Container = styled.div`
   width: 100%;
   margin: 0 auto;
   padding: 2rem;
-  border: 1px solid #0A3E27;
+  border: 1px solid var(--primaryColor);
   border-radius: 8px;
-  background-color: #E2D1BF;
+  background-color: var(--myWhite);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,7 +26,7 @@ const Container = styled.div`
 const Title = styled.h2`
   text-align: center;
   margin-bottom: 1.5rem;
-  color: #0A3E27;
+  color: var(--primaryColor);
 `;
 
 const Form = styled.form`
@@ -43,12 +43,12 @@ const FormGroup = styled.div`
 
 const Label = styled.label`
   margin-bottom: 0.5rem;
-  color: #0A3E27;
+  color: var(--primaryColor);
 `;
 
 const Input = styled.input`
   padding: 0.5rem;
-  border: 1px solid #0A3E27;
+  border: 1px solid var(--primaryColor);
   border-radius: 4px;
 `;
 
@@ -61,12 +61,12 @@ const Button = styled.button`
   padding: 0.75rem;
   border: none;
   border-radius: 4px;
-  background-color: #CC88FF;
-  color: white;
+  background-color: var(--primaryColor);
+  color: var(--myWhite);
   cursor: pointer;
 
   &:hover {
-    background-color: #AA66CC;
+    background-color: var(--secundaryColor);
   }
 `;
 
@@ -81,7 +81,7 @@ const LoginForm = () => {
     if (data?.token) {
       navigate('/');
     }
-  }, [data]);
+  }, [data, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -140,6 +140,5 @@ const LoginForm = () => {
     </Container>
   );
 };
-//prueva
 
 export default LoginForm;
