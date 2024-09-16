@@ -9,8 +9,7 @@ import Booking from '../src/pages/Booking/Booking.jsx';
 import Stripe from '../src/pages/Stripe/Stripe.jsx';
 import Success from '../src/pages/Prizes/PrizesSucces.jsx';
 import MyProfile from '../src/pages/MyProfile/MyProfile.jsx';
-
-
+import ScanTicketPage from '../src/pages/Tickets/ScanTicketPage.jsx';
 
 function AppRouter() {
   return useRoutes(
@@ -54,6 +53,10 @@ function AppRouter() {
       {
         element: <MyProfile/>,
         path: '/myProfile',
+      },
+      {
+        element: <ScanTicketPage />,
+        path: '/scan-ticket ',
       },
     ],
   )
