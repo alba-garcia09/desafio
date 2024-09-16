@@ -128,7 +128,7 @@ function Tickets() {
           <p><b>Incluye:</b></p>
           {renderIncludes(ticket.includes)}
           <p><b>Precio:</b> {ticket.price}€</p>
-          <button className="blueButton">
+          <button className="blueButton" onClick={() => navigate('/stripe')}>
             Comprar
           </button>
         </Accordion.Body>

@@ -29,7 +29,9 @@ function Booking() {
 
       {!isLoading && (
         <Container>
-          <b>Compra realizada con éxito</b>
+          <h2>Compra realizada con éxito</h2>
+          <p>Revisa tu correo</p>
+
         </Container>
       )}
     </>
