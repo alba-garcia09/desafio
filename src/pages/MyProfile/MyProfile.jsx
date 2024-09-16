@@ -1,7 +1,7 @@
 function MyProfile() {
-  return <>Hola
+  return <>
+  Hola
   </>
-
 }
 
 export default MyProfile
