@@ -12,12 +12,23 @@ const Container = styled.div`
   max-width: 1000px;
   margin: 0 auto;
   padding: 0 20px;
+  padding-top:2em;
   box-sizing: border-box;
 
   @media (max-width: 767px) {
     max-width: 100%;
     padding: 0 10px;
   }
+`;
+
+const Text = styled.div`
+  margin: 0 auto;
+  padding: 0 20px;
+  padding-bottom:2em;
+  text-align:left;
+  justify-content:left;
+  align-content:left;
+
 `;
 
 const Partners = styled.div`
@@ -57,13 +68,14 @@ const MyProduct = styled.img`
 
 function Accommodation() {
   const navigate = useNavigate();
+
   const { data, getData, error, isLoading } = useApi();
 
   useEffect(() => {
     getData({ route: 'accommodation/all' });
   }, []);
 
-  if(data && data.length) {
+  if (data && data.length) {
     console.log('data ', data);
   }
 
@@ -79,10 +91,11 @@ function Accommodation() {
     <>
       <Container>
         <Partners>
-          <h1>Encuentra alojamiento</h1>
-          <p className='littleText'>
-            ¿Necesitas alojamiento para el evento? Hemos negociado descuentos especiales en hoteles cercanos para los asistentes. Selecciona tu hotel, usa el código de descuento al reservar y disfruta de tarifas exclusivas, con la comodidad de estar a pocos minutos del evento.
-          </p>
+          <Text style={{paddinngBottom: '3em'}}>
+            <h1>Encuentra alojamiento</h1>
+            <p >¿Necesitas alojamiento para el evento? Hemos negociado descuentos especiales en hoteles cercanos para los asistentes. Selecciona tu hotel, usa el código de descuento al reservar y disfruta de tarifas exclusivas, con la comodidad de estar a pocos minutos del evento.</p>
+          </Text>
+
 
           <Carousel
             showArrows={false}
@@ -103,13 +116,13 @@ function Accommodation() {
                     <MyProduct src={item.image} alt={item.name} />
                   </div>
 
-                  <div style={{ paddingLeft: '3em', paddingRight: '3em', textAlign: 'left' }} className="col-12 col-lg-6">
-                    <h3>{item.name}</h3>
+                  <Text style={{ paddingLeft: '3em', paddingRight: '3em', textAlign: 'left' }} className="col-12 col-lg-6">
+                    <h2>{item.name}</h2>
                     <p style={{ color: 'var(--primaryColor)' }}>{item.neighborhood}</p>
-                    <p className='littleText'>{item.price}</p>
+                    <h3 >{item.price}€</h3>
                     <p className='littleText'>{item.discount}</p>
-                    <button >Go to Booking</button>
-                  </div>
+                    <button onClick={() => navigate('/booking')} >Go to Booking</button>
+                  </Text>
                 </ProductSeet>
               )
             ))}
