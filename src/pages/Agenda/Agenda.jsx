@@ -128,7 +128,9 @@ function Agenda() {
 
 
       </Container>
-<CalendarComponent></CalendarComponent>
+<CalendarComponent>
+
+</CalendarComponent>
     </>
   );
 }

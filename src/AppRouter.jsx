@@ -5,8 +5,11 @@ import Program from '../src/pages/Program/Program.jsx';
 import Prizes from '../src/pages/Prizes/Prizes.jsx';
 import Agenda from '../src/pages/Agenda/Agenda.jsx';
 import CalendarComponent from './components/Calendar.jsx';
-
-
+import Accommodation from '../src/pages/Accommodation/Accommodation.jsx';
+import Booking from '../src/pages/Booking/Booking.jsx';
+import Stripe from '../src/pages/Stripe/Stripe.jsx';
+import Success from '../src/pages/Prizes/PrizesSucces.jsx';
+import MyProfile from '../src/pages/MyProfile/MyProfile.jsx';
 
 function AppRouter() {
   return useRoutes(
@@ -34,6 +37,26 @@ function AppRouter() {
       {
         element: <CalendarComponent/>,
         path: '/calendar',
+      },
+      {
+        element: <Accommodation/>,
+        path: '/accommodation',
+      },
+      {
+        element: <Booking/>,
+        path: '/booking',
+      },
+      {
+        element: <Stripe/>,
+        path: '/stripe',
+      },
+      {
+        element: <Success/>,
+        path: '/successPrizes',
+      },
+      {
+        element: <MyProfile/>,
+        path: '/myProfile',
       },
     ],
   )

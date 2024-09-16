@@ -130,10 +130,10 @@ function MobileSideBar(props) {
           {
             <>
               <Item onClick={() => handleItemClick('/program')}>Programa</Item>
-              <Item onClick={() => handleItemClick('/speakers')}>Ponentes</Item>
+              <Item onClick={() => handleItemClick('/agenda')}>One2Ones</Item>
               <Item onClick={() => handleItemClick('/tickets')}>Entradas</Item>
-              <Item onClick={() => handleItemClick('/gallery')}>Galería</Item>
               <Item onClick={() => handleItemClick('/prizes')}>Premios Digit</Item>
+              <Item onClick={() => handleItemClick('/accommodation')}>Alojamiento</Item>
             </>
           }
         </Aside>
