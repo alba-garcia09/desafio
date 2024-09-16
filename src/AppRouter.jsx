@@ -1,6 +1,11 @@
+// src/AppRouter.jsx
 import { useRoutes } from 'react-router-dom';
-import Home from '../src/pages/Home/Home.jsx'
-import Tickets from '../src/pages/Tickets/Tickets';
+
+// Importaciones de ambos conjuntos de cambios
+import Home from './pages/Home/Home';
+import Tickets from './pages/Tickets/Tickets';
+import LoginPage from './pages/login/LoginPage';
+import RegisterPage from './pages/Register/RegisterPage';
 import Program from '../src/pages/Program/Program.jsx';
 import Prizes from '../src/pages/Prizes/Prizes.jsx';
 import Agenda from '../src/pages/Agenda/Agenda.jsx';
@@ -23,6 +28,14 @@ function AppRouter() {
         path: '/tickets',
       },
       {
+        element: <LoginPage />,
+        path: '/login',
+      },
+      {
+        element: <RegisterPage />,
+        path: '/register',
+      },
+      {
         element: <Program />,
         path: '/program',
       },
@@ -31,7 +44,7 @@ function AppRouter() {
         path: '/prizes',
       },
       {
-        element: <Agenda/>,
+        element: <Agenda />,
         path: '/agenda',
       },
       {
@@ -43,15 +56,15 @@ function AppRouter() {
         path: '/accommodation',
       },
       {
-        element: <Booking/>,
+        element: <Booking />,
         path: '/booking',
       },
       {
-        element: <Stripe/>,
+        element: <Stripe />,
         path: '/stripe',
       },
       {
-        element: <Success/>,
+        element: <Success />,
         path: '/successPrizes',
       },
       {
@@ -59,7 +72,7 @@ function AppRouter() {
         path: '/myProfile',
       },
     ],
-  )
+  );
 }
 
 export default AppRouter;
