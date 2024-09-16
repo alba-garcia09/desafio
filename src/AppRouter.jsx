@@ -1,4 +1,4 @@
-// src/AppRouter.jsx
+
 import { useRoutes } from 'react-router-dom';
 
 // Importaciones de ambos conjuntos de cambios
