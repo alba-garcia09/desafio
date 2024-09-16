@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import LoadingStripe from "../../components/SpinnerStripe";
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
   display: flex;
@@ -13,6 +14,7 @@ const Container = styled.div`
 `;
 
 function Booking() {
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -31,7 +33,7 @@ function Booking() {
         <Container>
           <h2>Compra realizada con éxito</h2>
           <p>Revisa tu correo</p>
-
+          <button onClick={() => navigate('/')}>Quiero seguir navegando</button>
         </Container>
       )}
     </>
