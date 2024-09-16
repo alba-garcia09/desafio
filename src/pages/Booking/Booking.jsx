@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import LoadingStripe from "../../components/SpinnerBooking";
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
   display: flex;
@@ -14,11 +15,12 @@ const Container = styled.div`
 
 function Booking() {
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 4000);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -29,7 +31,8 @@ function Booking() {
 
       {!isLoading && (
         <Container>
-          <b>Reserva realizada con éxito</b>
+          <h2>Reserva realizada con éxito</h2>
+          <button onClick={() => navigate('/')}>Quiero seguir navegando</button>
         </Container>
       )}
     </>
