@@ -62,7 +62,7 @@ function useApi() {
       } finally {
         setIsLoading(false);
       }
-    }, 2000);
+    }, 1000);
   }
 
   return { data, getData, error, isLoading };
