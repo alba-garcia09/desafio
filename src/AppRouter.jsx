@@ -10,6 +10,8 @@ import Booking from '../src/pages/Booking/Booking.jsx';
 import Stripe from '../src/pages/Stripe/Stripe.jsx';
 import Success from '../src/pages/Prizes/PrizesSucces.jsx';
 import MyProfile from '../src/pages/MyProfile/MyProfile.jsx';
+import Login from '../src/pages/Login/Login.jsx';
+import Register from '../src/pages/Register/Register.jsx';
 
 function AppRouter() {
   return useRoutes(
@@ -57,6 +59,14 @@ function AppRouter() {
       {
         element: <MyProfile/>,
         path: '/myProfile',
+      },
+      {
+        element: <Login/>,
+        path: '/login',
+      },
+      {
+        element: <Register/>,
+        path: '/register',
       },
     ],
   )
