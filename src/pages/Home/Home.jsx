@@ -240,8 +240,8 @@ function Home() {
           <TextContainer>
             <h1>¿QUÉ ES E-LEARNING EXPERIENCE?</h1>
             <p className="littleText">E-learning Experience es un evento de formación online y tecnología educativa, iniciado en 2016. Ha crecido en relevancia, incluyendo conferencias, talleres y networking. En 2024, ofrece entrevistas exclusivas One2One y el premio «Digit» para destacar las mejores iniciativas, con los ganadores anunciados en una cena especial.</p>
-            <button className="blackButton" onClick={() => navigate('/register')}>
-              Regístrate
+            <button className="blackButton" onClick={() => navigate('/login')}>
+              Accede a tu perfil
             </button>
           </TextContainer>
         </WhiteBanner>
