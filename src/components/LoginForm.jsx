@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import useApi from '../hooks/useAPI.js';
 
-
 // Styled components
 const Container = styled.div`
   width: 90%;
@@ -77,6 +76,21 @@ const Button = styled.button`
   }
 `;
 
+const RegisterBox = styled.div`
+  max-width: 500px;
+  display:flex;
+  flex-direction:row;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  margin-top:1.8em;
+  gap:0.8em;
+
+  @media (max-width: 767px) {
+    max-width: 100%;
+    padding: 0 10px;
+  }
+`;
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -84,7 +98,6 @@ const LoginForm = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const { getData, error: apiError, isLoading, data } = useApi();
-
 
   useEffect(() => {
     if (data?.token) {
@@ -150,6 +163,10 @@ const LoginForm = () => {
         <Button type="submit" disabled={isLoading}>
           {isLoading ? 'Loading...' : 'Login'}
         </Button>
+        <RegisterBox>
+          <p className='littleText'>¿No tienes cuenta?</p>
+          <p className='littleText' onClick={() => navigate('/register')}><b>Regístrate</b></p>
+        </RegisterBox>
       </Form>
     </Container>
   );
