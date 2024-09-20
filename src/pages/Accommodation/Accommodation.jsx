@@ -120,7 +120,7 @@ function Accommodation() {
                     <h2>{item.name}</h2>
                     <p style={{ color: 'var(--primaryColor)' }}>{item.neighborhood}</p>
                     <h3 >{item.price}€</h3>
-                    <p className='littleText'>{item.discount}</p>
+                    <p className='littleText' style={{color:'red'}}><b>{item.discount}% de descuentos gracias a E-learning</b></p>
                     <button onClick={() => navigate('/booking')} >Go to Booking</button>
                   </Text>
                 </ProductSeet>
