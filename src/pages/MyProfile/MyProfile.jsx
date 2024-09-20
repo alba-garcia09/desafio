@@ -2,7 +2,7 @@ import styled, { keyframes } from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import QRAlonso from '../../assets/qrAlonso.png'; // Importa tu imagen
+import QRAlonso from '../../assets/qrALONSO.png'; // Importa tu imagen
 import QREntrada from '../../assets/qrENTRADA.png'; // Importa tu imagen
 
 // Keyframes for icon animation
