@@ -32,7 +32,7 @@ function Booking() {
       {!isLoading && (
         <Container>
           <h2>Compra realizada con éxito</h2>
-          <p>Revisa tu correo</p>
+          <p>Revisa tu perfil</p>
           <button onClick={() => navigate('/')}>Quiero seguir navegando</button>
         </Container>
       )}
